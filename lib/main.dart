@@ -11,6 +11,7 @@ import 'package:push/services/push.dart';
 import 'package:push/presentation/HomePage.dart';
 
 
+import 'bloc/filter_bloc/filter_bloc.dart';
 import 'login_form.dart';
 import 'dart:async';
 import 'package:provider/provider.dart';
@@ -58,6 +59,7 @@ class MyApp extends StatelessWidget {
       providers:[
         BlocProvider<LoginBloc>(create: (context) => LoginBloc(LoginPostRepositoryImpl(ApiService()))),
         BlocProvider<NotificationBloc>(create: (context) => NotificationBloc()),
+        BlocProvider<FilterBloc>(create: (context) => FilterBloc()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

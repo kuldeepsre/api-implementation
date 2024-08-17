@@ -9,6 +9,7 @@ import '../../bloc/login/login_bloc.dart';
 import 'color_utils.dart';
 import 'custom_button/custom_button.dart';
 import 'custom_button/evaluation_button.dart';
+import 'custom_button/filter_dialog.dart';
 import 'custom_button/neumorphic_container.dart';
 import 'custom_button/neumorphic_popup.dart';
 import 'custom_button/nuroprism_card.dart';
@@ -207,7 +208,7 @@ class _LoginFormState extends State<LoginForm> {
                                   NuroprismCircleButton(
                                     icon: Icons.home,
                                     onPressed: () {
-                                      // Action for home button
+                                      _showFilterDialog(context);
                                       print('Home button pressed');
                                     },
                                     iconColor: Colors.white,
@@ -369,6 +370,15 @@ class _LoginFormState extends State<LoginForm> {
       ),
     );
   }
+}
+
+void _showFilterDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return FilterDialog();
+    },
+  );
 }
 
 void _showNeumorphicDialog(BuildContext context) {
