@@ -24,6 +24,7 @@ import 'custom_button/outline_button.dart';
 import 'home.dart';
 import 'model/Option.dart';
 import 'package:http/http.dart' as http;
+
 class LoginForm extends StatefulWidget {
   @override
   _LoginFormState createState() => _LoginFormState();
@@ -46,20 +47,18 @@ class _LoginFormState extends State<LoginForm> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-
       home: Scaffold(
         body: BlocListener<LoginBloc, LoginState>(
           listener: (context, state) {
             if (state is LoginSuccess) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) =>  HomeScreen()),
+                MaterialPageRoute(builder: (context) => HomeScreen()),
               );
             } else if (state is LoginFailure) {
               ErrorDialog.show(context, message: '${state.error}');
-            }
-            else if (state is NoInternetConnection) {
-            //  showCustomSnackbar(context,state.error);
+            } else if (state is NoInternetConnection) {
+              //  showCustomSnackbar(context,state.error);
             }
           },
           child: BlocBuilder<LoginBloc, LoginState>(
@@ -77,8 +76,9 @@ class _LoginFormState extends State<LoginForm> {
                       color: Colors.white,
                       child: Center(
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 18.0,horizontal: 12),
-                          child:  Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 18.0, horizontal: 12),
+                          child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 18.0),
                             child: Form(
                               key: _formKey,
@@ -87,15 +87,29 @@ class _LoginFormState extends State<LoginForm> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Center(child: const Text("Welcome To",style: TextStyle(color: Colors.black,decoration: TextDecoration.none,fontSize: 22),)),
-                                  SizedBox(height: 20,),
+                                  Center(
+                                      child: const Text(
+                                    "Welcome To",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        decoration: TextDecoration.none,
+                                        fontSize: 22),
+                                  )),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
                                   Center(
                                     child: Container(
-                                        width: MediaQuery.of(context).size.width,
+                                        width:
+                                            MediaQuery.of(context).size.width,
                                         height: 40,
-                                        child: Image.asset('assets/images/image1.png',)),
+                                        child: Image.asset(
+                                          'assets/images/image1.png',
+                                        )),
                                   ),
-                                  SizedBox(height: 20,),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
                                   Container(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 16.0, vertical: 8),
@@ -103,24 +117,29 @@ class _LoginFormState extends State<LoginForm> {
                                       decoration: InputDecoration(
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                              color: ColorUtils.app_primary_color,
+                                              color:
+                                                  ColorUtils.app_primary_color,
                                               width: 2),
                                         ),
                                         focusedBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                              color: ColorUtils.app_primary_color,
+                                              color:
+                                                  ColorUtils.app_primary_color,
                                               width: 4.0),
                                         ),
                                         border: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                              color: ColorUtils.app_primary_color),
+                                              color:
+                                                  ColorUtils.app_primary_color),
                                         ),
-                                        hintText: "codingskills-demo101@mejidigital.in",
+                                        hintText:
+                                            "codingskills-demo101@mejidigital.in",
                                         labelText: "Email",
                                         labelStyle: TextStyle(
                                           color: ColorUtils.app_primary_color,
                                         ),
-                                        hintStyle: TextStyle(color: Colors.grey.shade400),
+                                        hintStyle: TextStyle(
+                                            color: Colors.grey.shade400),
                                       ),
                                       autocorrect: _validate,
                                       controller: _usernameController,
@@ -146,17 +165,20 @@ class _LoginFormState extends State<LoginForm> {
                                         ),
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                              color: ColorUtils.app_primary_color,
+                                              color:
+                                                  ColorUtils.app_primary_color,
                                               width: 2),
                                         ),
                                         focusedBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                              color: ColorUtils.app_primary_color,
+                                              color:
+                                                  ColorUtils.app_primary_color,
                                               width: 4.0),
                                         ),
                                         border: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                              color: ColorUtils.app_primary_color),
+                                              color:
+                                                  ColorUtils.app_primary_color),
                                         ),
                                         suffixIcon: IconButton(
                                           onPressed: () {
@@ -185,13 +207,18 @@ class _LoginFormState extends State<LoginForm> {
                                   const SizedBox(height: 20),
                                   CustomButton(
                                     onPressed: () {
-                                      if (_formKey.currentState?.validate() ?? false) {
-                                        final username = _usernameController.text;
-                                        final password = _passwordController.text;
-                                        context.read<LoginBloc>().add(LoginButtonPressed(
-                                          username: username,
-                                          password: password,
-                                        ));
+                                      if (_formKey.currentState?.validate() ??
+                                          false) {
+                                        final username =
+                                            _usernameController.text;
+                                        final password =
+                                            _passwordController.text;
+                                        context
+                                            .read<LoginBloc>()
+                                            .add(LoginButtonPressed(
+                                              username: username,
+                                              password: password,
+                                            ));
                                       }
                                     },
                                     title: 'Login',
@@ -199,14 +226,19 @@ class _LoginFormState extends State<LoginForm> {
                                   Padding(
                                     padding: const EdgeInsets.all(18.0),
                                     child: GestureDetector(
-                                      onTap: (){
+                                      onTap: () {
                                         /*    Navigator.push(
                                           context,
                                           MaterialPageRoute(builder: (context) => const CreateAccount()),
                                         );*/
-                                      }
-                                      ,
-                                      child:  const Text("Create Account",style: TextStyle(color: Colors.lightBlue,decoration: TextDecoration.underline),),
+                                      },
+                                      child: const Text(
+                                        "Create Account",
+                                        style: TextStyle(
+                                            color: Colors.lightBlue,
+                                            decoration:
+                                                TextDecoration.underline),
+                                      ),
                                     ),
                                   ),
                                   NuroprismCircleButton(
@@ -216,7 +248,10 @@ class _LoginFormState extends State<LoginForm> {
                                       print('Home button pressed');
                                     },
                                     iconColor: Colors.white,
-                                    gradientColors: [Colors.purple, Colors.blue],
+                                    gradientColors: [
+                                      Colors.purple,
+                                      Colors.blue
+                                    ],
                                     size: 80.0,
                                     iconSize: 36.0,
                                     borderWidth: 4.0,
@@ -234,15 +269,16 @@ class _LoginFormState extends State<LoginForm> {
                                     borderWidth: 2.0,
                                     fontSize: 18.0,
                                     fontWeight: FontWeight.bold,
-                                    padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
-                                    margin: const EdgeInsets.symmetric(vertical: 8.0),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 12.0, horizontal: 24.0),
+                                    margin: const EdgeInsets.symmetric(
+                                        vertical: 8.0),
                                     borderRadius: 12.0,
                                   ),
                                   const SizedBox(height: 16.0),
                                   CustomOutlineButton(
                                     text: 'Secondary Button',
                                     onPressed: () {
-
                                       print('Secondary button pressed');
                                     },
                                     textColor: Colors.red,
@@ -250,7 +286,8 @@ class _LoginFormState extends State<LoginForm> {
                                     borderWidth: 1.5,
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.normal,
-                                    padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 10.0, horizontal: 20.0),
                                     margin: EdgeInsets.symmetric(vertical: 8.0),
                                     borderRadius: 8.0,
                                   ),
@@ -261,7 +298,10 @@ class _LoginFormState extends State<LoginForm> {
                                       print('Login button pressed');
                                     },
                                     textColor: Colors.white,
-                                    gradientColors: [Colors.purple, Colors.blue],
+                                    gradientColors: [
+                                      Colors.purple,
+                                      Colors.blue
+                                    ],
                                     borderRadius: 16.0,
                                     elevation: 12.0,
                                     fontSize: 20.0,
@@ -296,9 +336,13 @@ class _LoginFormState extends State<LoginForm> {
                                   ),
                                   NuroprismCard(
                                     title: 'Nuroprism Card',
-                                    subtitle: 'A futuristic card with gradient background.',
+                                    subtitle:
+                                        'A futuristic card with gradient background.',
                                     icon: Icons.star,
-                                    gradientColors: [Colors.purple, Colors.blue],
+                                    gradientColors: [
+                                      Colors.purple,
+                                      Colors.blue
+                                    ],
                                     borderRadius: 16.0,
                                     elevation: 12.0,
                                     padding: EdgeInsets.all(24.0),
@@ -315,9 +359,13 @@ class _LoginFormState extends State<LoginForm> {
                                   ),
                                   NuroprismCardView(
                                     title: 'Nuroprism Card',
-                                    subtitle: 'A futuristic card with gradient background.',
+                                    subtitle:
+                                        'A futuristic card with gradient background.',
                                     icon: Icons.star,
-                                    gradientColors: [Colors.purple, Colors.blue],
+                                    gradientColors: [
+                                      Colors.purple,
+                                      Colors.blue
+                                    ],
                                     borderRadius: 16.0,
                                     elevation: 12.0,
                                     padding: EdgeInsets.all(24.0),
@@ -341,7 +389,8 @@ class _LoginFormState extends State<LoginForm> {
                                     borderColor: Colors.purple,
                                     borderRadius: 16.0,
                                     elevation: 8.0,
-                                    padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 12.0, horizontal: 16.0),
                                     margin: EdgeInsets.symmetric(vertical: 8.0),
                                   ),
                                   SizedBox(height: 16.0),
@@ -352,28 +401,47 @@ class _LoginFormState extends State<LoginForm> {
                                     borderColor: Colors.blue,
                                     borderRadius: 16.0,
                                     elevation: 8.0,
-                                    padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 12.0, horizontal: 16.0),
                                     margin: EdgeInsets.symmetric(vertical: 8.0),
                                   ),
-
                                   SizedBox(height: 20.0),
-                            ElevatedButton(
-                              onPressed: () async {
-                                try {
-                                  List<Option> options = await fetchOptions();
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return CheckboxPopupDialog(options: options);
-                                    },
-                                  );
-                                } catch (e) {
-                                  print('Error fetching options: $e');
-                                }
-                              },
-                              child: Text('Show Multiple Selection Popup'),
+                                  ElevatedButton(
+                                    onPressed: () async {
+                                      try {
+                                        //List<Option> options = await fetchOptions();
+                                        const jsonString = '''[{"id": 1, "name": "Option 1"},
+                                                               {"id": 2, "name": "Option 2"},
+                                                               {"id": 3, "name": "Option 3"},
+                                                               {"id": 4, "name": "Option 4"} ]
+                                                                 ''';
 
-                        ),
+
+                                        List<dynamic> jsonList =
+                                            json.decode(jsonString);
+                                        List<Option> options = jsonList
+                                            .map(
+                                                (json) => Option.fromJson(json))
+                                            .toList();
+
+                                        print(options
+                                            .map((option) =>
+                                                '${option.id}: ${option.name}')
+                                            .toList());
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return CheckboxPopupDialog(
+                                                options: options);
+                                          },
+                                        );
+                                      } catch (e) {
+                                        print('Error fetching options: $e');
+                                      }
+                                    },
+                                    child:
+                                        Text('Show Multiple Selection Popup'),
+                                  ),
                                 ],
                               ),
                             ),
@@ -391,17 +459,7 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
-// Function to fetch options from a remote source
-  Future<List<Option>> fetchOptions() async {
-    final response = await http.get(Uri.parse('https://example.com/options'));
 
-    if (response.statusCode == 200) {
-      List<dynamic> jsonList = json.decode(response.body);
-      return jsonList.map((json) => Option.fromJson(json)).toList();
-    } else {
-      throw Exception('Failed to load options');
-    }
-  }
 }
 
 void _showFilterDialog(BuildContext context) {
@@ -432,4 +490,3 @@ void _showNeumorphicDialog(BuildContext context) {
     },
   );
 }
-

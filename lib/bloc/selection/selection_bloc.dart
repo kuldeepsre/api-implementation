@@ -35,8 +35,28 @@ class CheckboxPopupBloc extends Bloc<CheckboxPopupEvent, CheckboxPopupState> {
         selectedOptions.add(state.options[i]);
       }
     }
-
     // Handle apply action (e.g., print selected options)
-    print('Selected options: ${selectedOptions.map((option) => option.name).toList()}');
+    print('Selected options: ${selectedOptions.map((option) => option.id).toList()}');
+    /* // Prepare the data for API call
+    final selectedOptionIds = selectedOptions.map((option) => option.id).toList();
+
+    // Replace with your API endpoint
+    final apiUrl = 'https://example.com/api/apply-selections';
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: json.encode({'selected_option_ids': selectedOptionIds}),
+    );
+
+    if (response.statusCode == 200) {
+      // Handle success
+      print('Selections applied successfully');
+    } else {
+      // Handle error
+      print('Failed to apply selections');
+    }
+  }*/
   }
 }

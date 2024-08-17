@@ -44,7 +44,7 @@ class CheckboxPopupDialog extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   context.read<CheckboxPopupBloc>().add(ApplySelections());
-                  Navigator.of(context).pop(); // Close the dialog
+                //  Navigator.of(context).pop(); // Close the dialog
                 },
                 child: Text('Apply'),
               ),
