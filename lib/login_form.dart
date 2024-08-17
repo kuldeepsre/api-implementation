@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +9,7 @@ import 'package:push/utils/Spacing.dart';
 import 'package:push/utils/custom_dialog.dart';
 import '../../bloc/login/login_bloc.dart';
 import 'color_utils.dart';
+import 'custom_button/CheckboxPopupDialog.dart';
 import 'custom_button/custom_button.dart';
 import 'custom_button/evaluation_button.dart';
 import 'custom_button/filter_dialog.dart';
@@ -19,7 +22,8 @@ import 'custom_button/nuroprism_login_button.dart';
 import 'custom_button/nuroprism_text_form_field.dart';
 import 'custom_button/outline_button.dart';
 import 'home.dart';
-
+import 'model/Option.dart';
+import 'package:http/http.dart' as http;
 class LoginForm extends StatefulWidget {
   @override
   _LoginFormState createState() => _LoginFormState();
@@ -353,7 +357,23 @@ class _LoginFormState extends State<LoginForm> {
                                   ),
 
                                   SizedBox(height: 20.0),
+                            ElevatedButton(
+                              onPressed: () async {
+                                try {
+                                  List<Option> options = await fetchOptions();
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return CheckboxPopupDialog(options: options);
+                                    },
+                                  );
+                                } catch (e) {
+                                  print('Error fetching options: $e');
+                                }
+                              },
+                              child: Text('Show Multiple Selection Popup'),
 
+                        ),
                                 ],
                               ),
                             ),
@@ -369,6 +389,18 @@ class _LoginFormState extends State<LoginForm> {
         ),
       ),
     );
+  }
+
+// Function to fetch options from a remote source
+  Future<List<Option>> fetchOptions() async {
+    final response = await http.get(Uri.parse('https://example.com/options'));
+
+    if (response.statusCode == 200) {
+      List<dynamic> jsonList = json.decode(response.body);
+      return jsonList.map((json) => Option.fromJson(json)).toList();
+    } else {
+      throw Exception('Failed to load options');
+    }
   }
 }
 

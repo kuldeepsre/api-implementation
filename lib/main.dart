@@ -6,12 +6,14 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:push/api/api_services.dart';
 import 'package:push/bloc/login/login_bloc.dart';
 import 'package:push/bloc/notification/notification_bloc.dart';
+import 'package:push/model/Option.dart';
 import 'package:push/repositry/form_repository/login_repo.dart';
 import 'package:push/services/push.dart';
 import 'package:push/presentation/HomePage.dart';
 
 
 import 'bloc/filter_bloc/filter_bloc.dart';
+import 'bloc/selection/selection_bloc.dart';
 import 'login_form.dart';
 import 'dart:async';
 import 'package:provider/provider.dart';
@@ -55,11 +57,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
     return MultiProvider(
       providers:[
         BlocProvider<LoginBloc>(create: (context) => LoginBloc(LoginPostRepositoryImpl(ApiService()))),
         BlocProvider<NotificationBloc>(create: (context) => NotificationBloc()),
         BlocProvider<FilterBloc>(create: (context) => FilterBloc()),
+     //   BlocProvider<CheckboxPopupBloc>(create: (context) => CheckboxPopupBloc(options)),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

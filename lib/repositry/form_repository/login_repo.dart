@@ -5,8 +5,10 @@ import 'package:push/endpoint/globleconstant.dart';
 
 import '../../../api/api_services.dart';
 import '../../../model/login_response.dart';
+import '../../model/Option.dart';
 abstract class LoginRepository  {
   Future<LoginResponse> login(String username, String password);
+  Future<List<Option>> fetchOptions();
 }
 
 class LoginPostRepositoryImpl implements LoginRepository {
@@ -39,6 +41,18 @@ class LoginPostRepositoryImpl implements LoginRepository {
     } catch (e) {
       // Handle exceptions and errors
       throw Exception('Login failed: ${e.toString()}');
+    }
+  }
+
+  @override
+  Future<List<Option>> fetchOptions() async {
+    final response = await http.get(Uri.parse('https://example.com/options'));
+
+    if (response.statusCode == 200) {
+      List<dynamic> jsonList = json.decode(response.body);
+      return jsonList.map((json) => Option.fromJson(json)).toList();
+    } else {
+      throw Exception('Failed to load options');
     }
   }
 }
