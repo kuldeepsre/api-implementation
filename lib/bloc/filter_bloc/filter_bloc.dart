@@ -14,15 +14,12 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
     on<ChangePriceRange>(_onChangePriceRange);
     on<ApplyFilters>(_onApplyFilters);
   }
-
   void _onToggleOutOfStock(ToggleOutOfStock event, Emitter<FilterState> emit) {
     emit(state.copyWith(isOutOfStock: event.isChecked));
   }
-
   void _onChangeCategory(ChangeCategory event, Emitter<FilterState> emit) {
     emit(state.copyWith(category: event.category));
   }
-
   void _onChangePriceRange(ChangePriceRange event, Emitter<FilterState> emit) {
     emit(state.copyWith(priceRange: event.range));
   }
