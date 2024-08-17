@@ -1,11 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:push/bloc/navigaton/navigation_bloc.dart';
+import 'package:push/presentation/HomePage.dart';
 import 'package:push/presentation/dashboard.dart';
 import 'package:push/presentation/my_profile.dart';
+import 'package:push/presentation/notification.dart';
 import 'package:push/widget/bottom_navigation_bar_widget.dart';
+
+import 'bloc/notification/notification_bloc.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -27,20 +31,35 @@ class HomeScreen extends StatelessWidget {
                   child: Image.asset('assets/images/image1.png',)),
             ),
             automaticallyImplyLeading: false,
+            actions: [
+              BlocBuilder<NotificationBloc, NotificationState>(
+                builder: (context, state) {
+                  if (state is NotificationCountUpdated) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: NotificationBadge(totalNotifications: state.count),
+                    );
+                  }
+                  return Container();
+                },
+              ),
+
+            ],
           ),
+
           body: BlocBuilder<NavigationBloc, NavigationState>(
             builder: (context, state) {
               switch (state is NavigationUpdated ? state.index : 0) {
                 case 0:
-                  return MainDashboard();
+                  return const MainDashboard();
                 case 1:
                   return const Center(child: Text('My Oder'));
                 case 2:
                   return const Center(child: Text('Place Add'));
                 case 3:
-                  return const Center(child: Text('Cart'));
+                  return Notifications();
                   case 4:
-                  return MyProfile();
+                  return const MyProfile();
                 default:
                   return const Center(child: Text('Home Screen'));
               }

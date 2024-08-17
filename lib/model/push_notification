@@ -1,0 +1,34 @@
+// push_notification.dart
+class PushNotification {
+  final String? title;
+  final String? body;
+  final String? dataTitle;
+  final String? dataBody;
+
+  PushNotification({
+    this.title,
+    this.body,
+    this.dataTitle,
+    this.dataBody,
+  });
+
+  // Create a PushNotification instance from a map
+  factory PushNotification.fromMap(Map<String, dynamic> map) {
+    return PushNotification(
+      title: map['title'] as String?,
+      body: map['body'] as String?,
+      dataTitle: map['dataTitle'] as String?,
+      dataBody: map['dataBody'] as String?,
+    );
+  }
+
+  // Convert a PushNotification instance to a map
+  Map<String, dynamic> toMap() {
+    return {
+      'title': title,
+      'body': body,
+      'dataTitle': dataTitle,
+      'dataBody': dataBody,
+    };
+  }
+}

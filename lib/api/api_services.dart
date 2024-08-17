@@ -16,8 +16,8 @@ class ApiService {
       },
       body: jsonEncode(<String, String>{
         // 'email': '$username',
-           'email': '$username',
-            'password': '$password',
+           'email': 'codingskills-demo101@mejidigital.in',
+            'password': 'demo101',
       }),
     );
         return response;

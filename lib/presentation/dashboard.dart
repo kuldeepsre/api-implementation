@@ -131,7 +131,7 @@ class _MainDashboardState extends State<MainDashboard> {
                 child:  const Text("Book Services",style: TextStyle(color: Colors.lightBlue,decoration: TextDecoration.underline),),
               ),
             ),
-            Container(
+            SizedBox(
          width: MediaQuery.of(context).size.width,
              height: 120,
               child: ListView.builder(
@@ -151,20 +151,17 @@ class _MainDashboardState extends State<MainDashboard> {
                   ];
 
                   return Padding(
-                    padding: const EdgeInsets.only(right: 10), // Add padding between items
-                    child:Container(
-
-                      child: Card(
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        child: Image.network(
-                          'https://via.placeholder.com/300?text=DITTO',
-                         fit: BoxFit.fill,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        elevation: 5,
-                        margin: EdgeInsets.all(10),
+                    padding:  EdgeInsets.only(right: 10), // Add padding between items
+                    child:Card(
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      elevation: 5,
+                      margin: EdgeInsets.all(10),
+                      child: Image.network(
+                        'https://via.placeholder.com/300?text=DITTO',
+                       fit: BoxFit.fill,
                       ),
                     ),
 
