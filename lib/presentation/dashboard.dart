@@ -1,6 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:push/utils/text_styles.dart';
+import '../bloc/dashboard/category/category_bloc.dart';
+import '../bloc/dashboard/product/product_bloc.dart';
+import '../bloc/dashboard/vagitable/vigitable_bloc.dart';
+import '../color_utils.dart';
 class MainDashboard extends StatefulWidget {
   const MainDashboard({super.key});
   @override
@@ -8,179 +13,171 @@ class MainDashboard extends StatefulWidget {
 }
 
 class _MainDashboardState extends State<MainDashboard> {
-  final TextEditingController _searchController = TextEditingController();
-  String _searchText = '';
-  final List<Map<String, String>> _items = [
-    {'title': 'dsfsdf fdgfdg fdsgdfg fdgefdgsdfg  ', 'image': 'assets/images/image1.png'},
-    {'title': 'f gfdg fgdf fgdfg', 'image': 'assets/images/image2.png'},
-
-
-  ];
-
+  int? selectedVegetableId;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Other widgets in the Column
+      body: Column(
+      children: [
+        BlocBuilder<CategoryBloc, CategoryState>(
+          builder: (context, state) {
+            if (state is CategoriesLoading) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is CategoriesLoaded) {
+              return Container(
+                height: MediaQuery.of(context).size.height * 0.08,
+                child: Center(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: state.categories.length,
+                    itemBuilder: (context, index) {
+                      final category = state.categories[index];
+                      final isSelected =
+                          state.selectedCategory?.id == category.id;
+                      return Container(
+                        width: MediaQuery.of(context).size.height * 0.25,
+                        margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(18),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.blue.withOpacity(0.2),
+                              spreadRadius: 2,
+                              blurRadius: 4,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ), // Adjust the width as needed
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18),
+                          ),
+                          child: Center(
+                            child: ListTile(
+                              title: Center(
+                                child: Text(
+                                  category.name,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyles.bodyText1Accent,
+                                ),
+                              ),
+                              trailing: isSelected
+                                  ? const Icon(Icons.check, color: Colors.green)
+                                  : null,
+                              onTap: () {
+                                context
+                                    .read<CategoryBloc>()
+                                    .add(SelectCategory(category));
+                              /*  var id=state.selectedCategory?.id;*/
+                                print(category.id);
+                                context.read<ProductBloc>().add(LoadProducts(category.id));
 
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                height: 40, // Set a fixed height or use any other constraint as needed
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 8, // Number of items in your list
+                              },
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              );
+            } else if (state is CategoriesError) {
+              return Center(child: Text(state.message));
+            }
+            return const Center(child: Text('No categories found'));
+          },
+        ),
+        // Products List
+     /*   Expanded(
+          child: BlocBuilder<ProductBloc, ProductState>(
+            builder: (context, state) {
+              if (state is ProductsLoaded) {
+                return ListView.builder(
+                  itemCount: state.products.length,
                   itemBuilder: (context, index) {
-                    final items = [
-                      'Latest ',
-                      'Job',
-                      'Properties ',
-                      'Career ',
-                      'Service ',
-                      'Plan ',
-                      'Contact Us ',
-                      'Disclaimer '
-                    ];
-
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 10), // Add padding between items
-                      child: Text(
-                        items[index],
-                        style: TextStyle(fontSize: 18),
-                      ),
+                    final product = state.products[index];
+                    print(product);
+                    return ListTile(
+                      title: Text(product.name,style: TextStyles.heading1Accent,),
                     );
                   },
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                controller: _searchController,
-                onChanged: (text) {
-                  setState(() {
-                    _searchText = text.toLowerCase();
-                  });
-                },
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Search',
-                  prefixIcon: Icon(Icons.search),
-                ),
-              ),
-            ),
-            Container(
-            // Set a fixed height for the ListView
-              child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.vertical,
-                itemCount: _filteredItems().length,
-                itemBuilder: (context, index) {
-                  final item = _filteredItems()[index];
-                  return Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: Card(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              item['title']!,
-                              style: TextStyle(fontSize: 18),
-                            ),
-                          ),
-                          Center(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Image.asset(
-                                item['image']!,
-                                width: 100, // Set image width
-                                height: 100, // Set image height
-                                fit: BoxFit.fill, // Cover the image box
-                              ),
-                            ),
-                          ),
-                          // Text below the image
+                );
+              }
+              return const Center(child: Text('Select a category to see products'));
+            },
+          ),
+        ),*/
+        Expanded(child: BlocBuilder<VegetableBloc, VegetableState>(
+          builder: (context, state) {
+            if (state is VegetableLoading) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is VegetableError) {
+              return Center(child: Text('Error: ${state.message}'));
+            }
+            else if (state is VegetableLoaded) {
+              final vegetables = state.vegetables;
 
-                        ],
+              return Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      height: 48,
+                      padding: EdgeInsets.all(12),
+                      decoration: ShapeDecoration(
+                        color: ColorUtils.boarderBlue,
+                        shape: const RoundedRectangleBorder(
+                          side: BorderSide(
+                              width: .12, style: BorderStyle.solid),
+                          borderRadius:
+                          BorderRadius.all(Radius.circular(8.0)),
+                        ),
+                      ),
+                      //MediaQuery.of(context).size.height * .,
+                      child: DropdownButton<int>(
+                        isExpanded: true,
+                        isDense: false,
+                        underline: SizedBox(),
+                        iconEnabledColor: Colors.white,
+                        dropdownColor: ColorUtils.boarderBlue,
+                        hint: const Text(
+                          "Select Vagitable",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        value: selectedVegetableId,
+                        items: vegetables.map<DropdownMenuItem<int>>((Map<String, dynamic> veg) {
+                              return DropdownMenuItem<int>(
+                                value: veg['id'],
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 4.0, right: 4.0),
+                                  child: Text(
+                                    veg['name'],
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                        onChanged: (newvalue) {
+                          setState(() {
+                            selectedVegetableId = newvalue;
+                            print('Selected Vegetable ID: $selectedVegetableId');
+                          });
+                        },
                       ),
                     ),
-                  );
-                },
-              ),
-            ),
+                  ),
 
-
-            Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: GestureDetector(
-                onTap: (){
-                  /*    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => const CreateAccount()),
-                                    );*/
-                }
-                ,
-                child:  const Text("Book Services",style: TextStyle(color: Colors.lightBlue,decoration: TextDecoration.underline),),
-              ),
-            ),
-            SizedBox(
-         width: MediaQuery.of(context).size.width,
-             height: 120,
-              child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: 8, // Number of items in your list
-                itemBuilder: (context, index) {
-                  final items = [
-                    'Latest ',
-                    'Job',
-                    'Properties ',
-                    'Career ',
-                    'Service ',
-                    'Plan ',
-                    'Contact Us ',
-                    'Disclaimer '
-                  ];
-
-                  return Padding(
-                    padding:  EdgeInsets.only(right: 10), // Add padding between items
-                    child:Card(
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      elevation: 5,
-                      margin: EdgeInsets.all(10),
-                      child: Image.network(
-                        'https://via.placeholder.com/300?text=DITTO',
-                       fit: BoxFit.fill,
-                      ),
-                    ),
-
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
-      )
+                ],
+              );
+            }
+            return const Center(child: Text('Select a vegetable'));
+          },
+        ))
+      ],
+      ),
     );
   }
-  // Filter items based on search text
-  List<Map<String, String>> _filteredItems() {
-    if (_searchText.isEmpty) {
-      return _items;
-    } else {
-      return _items.where((item) => item['title']!.toLowerCase().contains(_searchText)).toList();
-    }
-  }
 }
-

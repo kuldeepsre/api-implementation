@@ -12,8 +12,12 @@ import 'package:push/services/push.dart';
 import 'package:push/presentation/HomePage.dart';
 
 
+import 'bloc/dashboard/category/category_bloc.dart';
+import 'bloc/dashboard/product/product_bloc.dart';
+import 'bloc/dashboard/vagitable/vigitable_bloc.dart';
 import 'bloc/filter_bloc/filter_bloc.dart';
 import 'bloc/selection/selection_bloc.dart';
+import 'home.dart';
 import 'login_form.dart';
 import 'dart:async';
 import 'package:provider/provider.dart';
@@ -63,7 +67,10 @@ class MyApp extends StatelessWidget {
         BlocProvider<LoginBloc>(create: (context) => LoginBloc(LoginPostRepositoryImpl(ApiService()))),
         BlocProvider<NotificationBloc>(create: (context) => NotificationBloc()),
         BlocProvider<FilterBloc>(create: (context) => FilterBloc()),
-     //   BlocProvider<CheckboxPopupBloc>(create: (context) => CheckboxPopupBloc(options)),
+        BlocProvider<CategoryBloc>(create: (context) => CategoryBloc()..add(LoadCategories())),
+        BlocProvider<ProductBloc>(create: (context) => ProductBloc()..add(LoadProducts(1))),
+        BlocProvider<VegetableBloc>(create: (context) => VegetableBloc()..add(FetchVegetables())),
+
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -72,7 +79,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home:  LoginForm(),
+        home:  HomeScreen(),
       ),
     );
   }

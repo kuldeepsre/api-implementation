@@ -84,9 +84,8 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
-  #    - assets/images/catalogue/
-  #    - assets/images/products/
-
+    - assets/categories.json
+    - assets/products.json
   fonts:
     - family: Montserrat
       fonts:
