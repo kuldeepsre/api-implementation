@@ -7,6 +7,7 @@ import 'package:push/CreateAccount.dart';
 import 'package:push/painter/ArcPainter.dart';
 import 'package:push/painter/CircleClipper.dart';
 import 'package:push/painter/DiagonalClipper.dart';
+import 'package:push/painter/RailLineClipper.dart';
 import 'package:push/painter/RoundedRectangleClipper.dart';
 import 'package:push/painter/TicketClipper.dart';
 import 'package:push/presentation/Signup.dart';
@@ -656,6 +657,37 @@ class _LoginFormState extends State<LoginForm> {
                                       ),
                                     ),
                                   ),
+                              const SizedBox(height: 20.0),
+                              Center(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Center(
+                                      child: ClipPath(
+                                        clipper: RailLineClipper(),
+                                        child: Container(
+                                          width: 200, // Width of the rail line container
+                                          height: 400, // Height of the rail line container
+                                          color: Colors.brown, // Background color for the rail line
+                                        ),
+                                      ),
+                                    ),
+                                    Center(
+                                      child: ClipPath(
+                                        clipper: RailLineClipper(),
+                                        child: Container(
+                                          width: 200, // Width of the rail line container
+                                          height: 400, // Height of the rail line container
+                                          color: Colors.brown, // Background color for the rail line
+                                        ),
+                                      ),
+                                    ),
+
+                                  ],
+                                ),
+                              ),
+
                                 ],
                               ),
                             ),

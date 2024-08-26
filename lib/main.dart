@@ -7,6 +7,7 @@ import 'package:push/api/api_services.dart';
 import 'package:push/bloc/login/login_bloc.dart';
 import 'package:push/bloc/notification/notification_bloc.dart';
 import 'package:push/model/Option.dart';
+import 'package:push/presentation/habit_dashboard.dart';
 import 'package:push/repositry/form_repository/login_repo.dart';
 import 'package:push/services/push.dart';
 import 'package:push/presentation/HomePage.dart';
@@ -17,6 +18,7 @@ import 'bloc/dashboard/chip/chip_bloc.dart';
 
 import 'bloc/dashboard/vagitable/vigitable_bloc.dart';
 import 'bloc/filter_bloc/filter_bloc.dart';
+import 'bloc/habit/item_bloc.dart';
 import 'bloc/home_product/product_dashboard_bloc.dart';
 import 'bloc/selection/selection_bloc.dart';
 import 'home.dart';
@@ -75,6 +77,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<ProductDashboardBloc>(create: (context) => ProductDashboardBloc()..add(LoadProducts())),
         BlocProvider<VegetableBloc>(create: (context) => VegetableBloc()..add(FetchVegetables())),
         BlocProvider<ChipBloc>(create: (context) => ChipBloc()..add(LoadChips())),
+        BlocProvider<ItemBloc>(create: (context) => ItemBloc()..add(FetchItems())),
 
       ],
       child: MaterialApp(
@@ -84,7 +87,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home:  LoginForm(),
+        home:  CalendarView(),
       ),
     );
   }

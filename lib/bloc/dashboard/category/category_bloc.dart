@@ -16,9 +16,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     on<LoadCategories>(_onLoadCategories);
     on<SelectCategory>(_onSelectCategory);
     on<ToggleCategorySelection>(_onToggleCategorySelection);
-
   }
-
   Future<void> _onLoadCategories(
       LoadCategories event,
       Emitter<CategoryState> emit,
