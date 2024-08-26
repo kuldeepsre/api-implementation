@@ -47,6 +47,7 @@ class SelectableCard extends StatelessWidget {
                 Center(
                   child: Text(
                     item.name.toString().toUpperCase() ?? '',
+                    textScaleFactor: 1,
                     style: TextStyle(
                       color: item.isSelected ? Colors.white : Colors.black,
                       fontSize: 16,
@@ -59,7 +60,7 @@ class SelectableCard extends StatelessWidget {
                     item.email ?? '',
                     style: TextStyle(
                       color: item.isSelected ? Colors.white : Colors.black,
-                      fontSize: 16,
+                      fontSize: 14,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -69,7 +70,7 @@ class SelectableCard extends StatelessWidget {
                     item.company?.name ?? '',
                     style: TextStyle(
                       color: item.isSelected ? Colors.white : Colors.black,
-                      fontSize: 16,
+                      fontSize: 12,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

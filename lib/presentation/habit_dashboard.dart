@@ -6,6 +6,7 @@ import 'package:push/utils/text_styles.dart';
 
 import '../bloc/habit/item_bloc.dart';
 import '../bloc/habit/item_state.dart';
+import '../painter/RoundedRectangleClipper.dart';
 import 'component/DateCard.dart';
 import 'component/selected_card.dart';
 
@@ -66,54 +67,59 @@ class _CalendarViewState extends State<CalendarView> {
                   ),
                 ),
               const SizedBox(height: 30,),
-              Container(
-                height: MediaQuery.of(context).size.width,
-                child: BlocBuilder<ItemBloc, ItemState>(
-                builder: (context, state) {
-                  if (state is ItemLoading) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (state is ItemLoaded) {
-                    final items = state.items;
-                 /*  _selectedItemId = items.first.id;
-                   items.first.isSelected = true; // Set the first item as selected*/
+              ClipPath(
+                clipper: RoundedRectangleClipper(borderRadius: 12
+               
+                ),
+                child: Container(
+                  height: MediaQuery.of(context).size.width*.45,
+                  child: BlocBuilder<ItemBloc, ItemState>(
+                  builder: (context, state) {
+                    if (state is ItemLoading) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else if (state is ItemLoaded) {
+                      final items = state.items;
+                   /*  _selectedItemId = items.first.id;
+                     items.first.isSelected = true; // Set the first item as selected*/
 
-                    return GridView.builder(
-                      shrinkWrap: true,
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 8,
-                        mainAxisSpacing: 8,
-                      ),
-                      padding: const EdgeInsets.all(8),
-                      itemCount: items.length,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        final item = items[index];
+                      return GridView.builder(
+                        shrinkWrap: true,
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 1,
+                          crossAxisSpacing: 8,
+                          mainAxisSpacing: 8,
+                        ),
+                        padding: const EdgeInsets.all(8),
+                        itemCount: items.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          final item = items[index];
 
 
-                        return SelectableCard(
-                          item: item,
+                          return SelectableCard(
+                            item: item,
 
 
-                          onTap: () {
-                            setState(() {
-                              // Deselect all items
-                              items.forEach((i) => i.isSelected = false);
-                              // Select the tapped item
-                              item.isSelected = true;
-                              print('Selected Item: ${item.name}');
-                            });
-                          },
-                        );
-                      },
-                    );
-                  } else if (state is ItemError) {
-                    return Center(child: Text(state.message));
-                  } else {
-                    return Center(child: Text('No data available'));
-                  }
-                },
+                            onTap: () {
+                              setState(() {
+                                // Deselect all items
+                                items.forEach((i) => i.isSelected = false);
+                                // Select the tapped item
+                                item.isSelected = true;
+                                print('Selected Item: ${item.name}');
+                              });
+                            },
+                          );
+                        },
+                      );
+                    } else if (state is ItemError) {
+                      return Center(child: Text(state.message));
+                    } else {
+                      return Center(child: Text('No data available'));
+                    }
+                  },
             ),
+                ),
               ),
 
               ],
