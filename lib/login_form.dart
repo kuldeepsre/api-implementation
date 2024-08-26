@@ -7,6 +7,7 @@ import 'package:push/CreateAccount.dart';
 import 'package:push/presentation/Signup.dart';
 import 'package:push/presentation/component/Background.dart';
 import 'package:push/presentation/component/already_have_an_account_acheck.dart';
+import 'package:push/presentation/component/login_screen_top_image.dart';
 import 'package:push/presentation/component/or_divider.dart';
 import 'package:push/presentation/component/welcome_image.dart';
 import 'package:push/utils/LoadingIndicator.dart';
@@ -95,7 +96,7 @@ class _LoginFormState extends State<LoginForm> {
                                   const SizedBox(
                                     height: 20,
                                   ),
-                                  const WelcomeImage(),
+                                   LoginScreenTopImage(),
                                   const SizedBox(
                                     height: 20,
                                   ),
