@@ -8,6 +8,7 @@ import 'package:push/painter/ArcPainter.dart';
 import 'package:push/painter/CircleClipper.dart';
 import 'package:push/painter/DiagonalClipper.dart';
 import 'package:push/painter/RoundedRectangleClipper.dart';
+import 'package:push/painter/TicketClipper.dart';
 import 'package:push/presentation/Signup.dart';
 import 'package:push/presentation/component/Background.dart';
 import 'package:push/presentation/component/already_have_an_account_acheck.dart';
@@ -38,6 +39,7 @@ import 'model/Option.dart';
 import 'package:http/http.dart' as http;
 import 'package:push/painter/RectanglePainter.dart';
 import 'package:push/painter/CirclePainter.dart';
+
 class LoginForm extends StatefulWidget {
   @override
   _LoginFormState createState() => _LoginFormState();
@@ -83,7 +85,7 @@ class _LoginFormState extends State<LoginForm> {
                 child: Padding(
                   padding: Spacing.margin4,
                   child: Padding(
-                    padding: const EdgeInsets.only(top:50),
+                    padding: const EdgeInsets.only(top: 50),
                     child: SingleChildScrollView(
                       child: Center(
                         child: Padding(
@@ -101,7 +103,7 @@ class _LoginFormState extends State<LoginForm> {
                                   const SizedBox(
                                     height: 20,
                                   ),
-                                   const LoginScreenTopImage(),
+                                  const LoginScreenTopImage(),
                                   const SizedBox(
                                     height: 20,
                                   ),
@@ -113,22 +115,22 @@ class _LoginFormState extends State<LoginForm> {
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
                                               color:
-                                              ColorUtils.app_primary_color,
+                                                  ColorUtils.app_primary_color,
                                               width: 2),
                                         ),
                                         focusedBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
                                               color:
-                                              ColorUtils.app_primary_color,
+                                                  ColorUtils.app_primary_color,
                                               width: 4.0),
                                         ),
                                         border: UnderlineInputBorder(
                                           borderSide: BorderSide(
                                               color:
-                                              ColorUtils.app_primary_color),
+                                                  ColorUtils.app_primary_color),
                                         ),
                                         hintText:
-                                        "codingskills-demo101@mejidigital.in",
+                                            "codingskills-demo101@mejidigital.in",
                                         labelText: "Email",
                                         labelStyle: TextStyle(
                                           color: ColorUtils.app_primary_color,
@@ -161,19 +163,19 @@ class _LoginFormState extends State<LoginForm> {
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
                                               color:
-                                              ColorUtils.app_primary_color,
+                                                  ColorUtils.app_primary_color,
                                               width: 2),
                                         ),
                                         focusedBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
                                               color:
-                                              ColorUtils.app_primary_color,
+                                                  ColorUtils.app_primary_color,
                                               width: 4.0),
                                         ),
                                         border: UnderlineInputBorder(
                                           borderSide: BorderSide(
                                               color:
-                                              ColorUtils.app_primary_color),
+                                                  ColorUtils.app_primary_color),
                                         ),
                                         suffixIcon: IconButton(
                                           onPressed: () {
@@ -202,7 +204,6 @@ class _LoginFormState extends State<LoginForm> {
                                   const SizedBox(height: 20),
                                   CustomOutlineButton(
                                     width: MediaQuery.of(context).size.width,
-
                                     text: 'Login',
                                     onPressed: () {
                                       if (_formKey.currentState?.validate() ??
@@ -214,9 +215,9 @@ class _LoginFormState extends State<LoginForm> {
                                         context
                                             .read<LoginBloc>()
                                             .add(LoginButtonPressed(
-                                          username: username,
-                                          password: password,
-                                        ));
+                                              username: username,
+                                              password: password,
+                                            ));
                                       }
                                     },
                                     textColor: Colors.blue,
@@ -230,8 +231,8 @@ class _LoginFormState extends State<LoginForm> {
                                         vertical: 8.0),
                                     borderRadius: 12.0,
                                   ),
-                               /*   OrDivider(),*/
-                             /*     const SizedBox(height: Spacing.defaultPadding),*/
+                                  /*   OrDivider(),*/
+                                  /*     const SizedBox(height: Spacing.defaultPadding),*/
                                   AlreadyHaveAnAccountCheck(
                                     press: () {
                                       Navigator.push(
@@ -248,10 +249,10 @@ class _LoginFormState extends State<LoginForm> {
                                       padding: const EdgeInsets.all(18.0),
                                       child: GestureDetector(
                                         onTap: () {
-                                          *//*    Navigator.push(
+                                          */ /*    Navigator.push(
                                             context,
                                             MaterialPageRoute(builder: (context) => const CreateAccount()),
-                                          );*//*
+                                          );*/ /*
                                         },
                                         child: const Text(
                                           "Create Account",
@@ -266,7 +267,6 @@ class _LoginFormState extends State<LoginForm> {
                                     icon: Icons.home,
                                     onPressed: () {
                                       _showFilterDialog(context);
-
                                     },
                                     iconColor: Colors.white,
                                     gradientColors: const [
@@ -311,7 +311,8 @@ class _LoginFormState extends State<LoginForm> {
                                     fontWeight: FontWeight.normal,
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 10.0, horizontal: 20.0),
-                                    margin: const EdgeInsets.symmetric(vertical: 8.0),
+                                    margin: const EdgeInsets.symmetric(
+                                        vertical: 8.0),
                                     borderRadius: 8.0,
                                   ),
                                   NuroprismLoginButton(
@@ -360,7 +361,7 @@ class _LoginFormState extends State<LoginForm> {
                                   NuroprismCard(
                                     title: 'Nuroprism Card',
                                     subtitle:
-                                    'A futuristic card with gradient background.',
+                                        'A futuristic card with gradient background.',
                                     icon: Icons.star,
                                     gradientColors: const [
                                       Colors.purple,
@@ -375,7 +376,10 @@ class _LoginFormState extends State<LoginForm> {
                                     title: 'Another Card',
                                     subtitle: 'Different gradient and styling.',
                                     icon: Icons.favorite,
-                                    gradientColors: const [Colors.red, Colors.orange],
+                                    gradientColors: const [
+                                      Colors.red,
+                                      Colors.orange
+                                    ],
                                     borderRadius: 12.0,
                                     elevation: 8.0,
                                     padding: const EdgeInsets.all(16.0),
@@ -383,7 +387,7 @@ class _LoginFormState extends State<LoginForm> {
                                   NuroprismCardView(
                                     title: 'Nuroprism Card',
                                     subtitle:
-                                    'A futuristic card with gradient background.',
+                                        'A futuristic card with gradient background.',
                                     icon: Icons.star,
                                     gradientColors: const [
                                       Colors.purple,
@@ -392,18 +396,23 @@ class _LoginFormState extends State<LoginForm> {
                                     borderRadius: 16.0,
                                     elevation: 12.0,
                                     padding: const EdgeInsets.all(24.0),
-                                    margin: const EdgeInsets.symmetric(vertical: 8.0),
+                                    margin: const EdgeInsets.symmetric(
+                                        vertical: 8.0),
                                   ),
                                   const SizedBox(height: 16.0),
                                   NuroprismCardView(
                                     title: 'Another Card',
                                     subtitle: 'Different gradient and styling.',
                                     icon: Icons.favorite,
-                                    gradientColors: const [Colors.red, Colors.orange],
+                                    gradientColors: const [
+                                      Colors.red,
+                                      Colors.orange
+                                    ],
                                     borderRadius: 12.0,
                                     elevation: 8.0,
                                     padding: const EdgeInsets.all(16.0),
-                                    margin: const EdgeInsets.symmetric(vertical: 8.0),
+                                    margin: const EdgeInsets.symmetric(
+                                        vertical: 8.0),
                                   ),
                                   NuroprismTextFormField(
                                     hintText: 'Email',
@@ -414,7 +423,8 @@ class _LoginFormState extends State<LoginForm> {
                                     elevation: 8.0,
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 12.0, horizontal: 16.0),
-                                    margin: const EdgeInsets.symmetric(vertical: 8.0),
+                                    margin: const EdgeInsets.symmetric(
+                                        vertical: 8.0),
                                   ),
                                   const SizedBox(height: 16.0),
                                   NuroprismTextFormField(
@@ -426,22 +436,23 @@ class _LoginFormState extends State<LoginForm> {
                                     elevation: 8.0,
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 12.0, horizontal: 16.0),
-                                    margin: const EdgeInsets.symmetric(vertical: 8.0),
+                                    margin: const EdgeInsets.symmetric(
+                                        vertical: 8.0),
                                   ),
                                   const SizedBox(height: 20.0),
                                   ElevatedButton(
                                     onPressed: () async {
                                       try {
                                         //List<Option> options = await fetchOptions();
-                                        const jsonString = '''[{"id": 1, "name": "Option 1"},
+                                        const jsonString =
+                                            '''[{"id": 1, "name": "Option 1"},
                                                                  {"id": 2, "name": "Option 2"},
                                                                  {"id": 3, "name": "Option 3"},
                                                                  {"id": 4, "name": "Option 4"} ]
                                                                    ''';
 
-
                                         List<dynamic> jsonList =
-                                        json.decode(jsonString);
+                                            json.decode(jsonString);
                                         List<Option> options = jsonList
                                             .map(
                                                 (json) => Option.fromJson(json))
@@ -449,7 +460,7 @@ class _LoginFormState extends State<LoginForm> {
 
                                         print(options
                                             .map((option) =>
-                                        '${option.id}: ${option.name}')
+                                                '${option.id}: ${option.name}')
                                             .toList());
                                         showDialog(
                                           context: context,
@@ -462,73 +473,81 @@ class _LoginFormState extends State<LoginForm> {
                                         print('Error fetching options: $e');
                                       }
                                     },
-                                    child:
-                                    const Text('Show Multiple Selection Popup'),
+                                    child: const Text(
+                                        'Show Multiple Selection Popup'),
                                   ),
                                   Center(
-                                child: CustomPaint(
-                                  size: const Size(300, 200), // Size of the CustomPaint widget
-                                  painter: RectanglePainter(),
-                                ),
-                              ),
+                                    child: CustomPaint(
+                                      size: const Size(300, 200),
+                                      // Size of the CustomPaint widget
+                                      painter: RectanglePainter(),
+                                    ),
+                                  ),
                                   Center(
-                                  child: CustomPaint(
-                                  size: const Size(300, 200), // Size of the CustomPaint widget
-                                  painter: CirclePainter(),
-                                ),
-                              ),
+                                    child: CustomPaint(
+                                      size: const Size(300, 200),
+                                      // Size of the CustomPaint widget
+                                      painter: CirclePainter(),
+                                    ),
+                                  ),
                                   Center(
-                                  child: CustomPaint(
-                                  size: const Size(300, 200), // Size of the CustomPaint widget
-                                  painter: ArcPainter(),
-                                ),
-                              ),
+                                    child: CustomPaint(
+                                      size: const Size(300, 200),
+                                      // Size of the CustomPaint widget
+                                      painter: ArcPainter(),
+                                    ),
+                                  ),
                                   const SizedBox(height: 20.0),
-                              Center(
-                                child: Container(
-                                  width: 100, // Width of the container
-                                  height: 100, // Height of the container
-                                  decoration: BoxDecoration(
-                                    color: Colors.blue[100], // Background color of the container
-                                    borderRadius: BorderRadius.circular(10), // Rounded corners
+                                  Center(
+                                    child: Container(
+                                      width: 100, // Width of the container
+                                      height: 100, // Height of the container
+                                      decoration: BoxDecoration(
+                                        color: Colors.blue[100],
+                                        // Background color of the container
+                                        borderRadius: BorderRadius.circular(
+                                            10), // Rounded corners
+                                      ),
+                                      child: CustomPaint(
+                                        painter: CirclePainter(),
+                                      ),
+                                    ),
                                   ),
-                                  child: CustomPaint(
-                                    painter: CirclePainter(),
-                                  ),
-                                ),
-                              ),
-
-                              const SizedBox(height: 20.0),
-                              Center(
-                                child: ClipPath(
-                                  clipper: DiagonalClipper(),
-                                  child: Container(
-                                    width: 300,
-                                    height: 200,
-                                    color: Colors.blue, // Background color of the container
-                                    child: const Center(
-                                      child: Text(
-                                        'Hello, Flutter!',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.bold,
+                                  const SizedBox(height: 20.0),
+                                  Center(
+                                    child: ClipPath(
+                                      clipper: DiagonalClipper(),
+                                      child: Container(
+                                        width: 300,
+                                        height: 200,
+                                        color: Colors.blue,
+                                        // Background color of the container
+                                        child: const Center(
+                                          child: Text(
+                                            'Hello, Flutter!',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 24,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ),
                                   const SizedBox(height: 20.0),
-
                                   Center(
                                     child: ClipPath(
                                       clipper: CircleClipper(),
                                       child: Container(
-                                        width: 200, // Width of the container
-                                        height: 200, // Height of the container
-                                        color: Colors.blue, // Background color of the container
-                                        alignment: Alignment.center, // Center the text inside the container
+                                        width: 200,
+                                        // Width of the container
+                                        height: 200,
+                                        // Height of the container
+                                        color: Colors.blue,
+                                        // Background color of the container
+                                        alignment: Alignment.center,
+                                        // Center the text inside the container
                                         child: const Padding(
                                           padding: EdgeInsets.all(8.0),
                                           child: Text(
@@ -545,30 +564,98 @@ class _LoginFormState extends State<LoginForm> {
                                     ),
                                   ),
                                   const SizedBox(height: 20.0),
-                                  ClipPath(
-                                    clipper: RoundedRectangleClipper(
-                                      borderRadius: 30
-                                    ),
-                                    child: Container(
-                                      width: 200, // Width of the container
-                                      height: 200, // Height of the container
-                                      color: Colors.blue, // Background color of the container
-                                      alignment: Alignment.center, // Center the text inside the container
-                                      child: const Padding(
-                                        padding: EdgeInsets.all(8.0),
-                                        child: Text(
-                                          'Hello, Flutter! ',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      ClipPath(
+                                        clipper: RoundedRectangleClipper(
+                                            borderRadius: 12),
+                                        child: Container(
+                                          width: 200,
+                                          // Width of the container
+                                          height: 200,
+                                          // Height of the container
+                                          color: Colors.blue,
+                                          // Background color of the container
+                                          alignment: Alignment.center,
+                                          // Center the text inside the container
+                                          child: const Padding(
+                                            padding: EdgeInsets.all(8.0),
+                                            child: Text(
+                                              'Hello, Flutter! ',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
                                           ),
+                                        ),
+                                      ),
+                                      ClipPath(
+                                        clipper: RoundedRectangleClipper(
+                                            borderRadius: 12),
+                                        child: Container(
+                                          width: 200,
+                                          // Width of the container
+                                          height: 200,
+                                          // Height of the container
+                                          color: Colors.blue,
+                                          // Background color of the container
+                                          alignment: Alignment.center,
+                                          // Center the text inside the container
+                                          child: const Padding(
+                                            padding: EdgeInsets.all(8.0),
+                                            child: Text(
+                                              'Hello, Flutter! ',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 20.0),
+                                  Center(
+                                    child: ClipPath(
+                                      clipper: TicketClipper(),
+                                      child: Container(
+                                        width: 300,
+                                        height: 150,
+                                        color: Colors.blue,
+                                        // Background color of the ticket
+                                        child: const Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              'VIP Ticket',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 24,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            SizedBox(height: 8),
+                                            Text(
+                                              'Admit One',
+                                              style: TextStyle(
+                                                color: Colors.white70,
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ),
                                   ),
-                                  const SizedBox(height: 20.0),
                                 ],
                               ),
                             ),
@@ -585,8 +672,6 @@ class _LoginFormState extends State<LoginForm> {
       ),
     );
   }
-
-
 }
 
 void _showFilterDialog(BuildContext context) {
