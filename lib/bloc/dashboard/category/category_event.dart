@@ -16,3 +16,8 @@ class SelectCategory extends CategoryEvent {
 }
 
 
+class ToggleCategorySelection extends CategoryEvent {
+  final int categoryId;
+
+  ToggleCategorySelection(this.categoryId);
+}

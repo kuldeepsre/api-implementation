@@ -9,6 +9,7 @@ abstract class CategoryState extends Equatable {
 class CategoriesInitial extends CategoryState {}
 
 class CategoriesLoading extends CategoryState {}
+class CategoryLoading extends CategoryState {}
 
 class CategoriesLoaded extends CategoryState {
   final List<Category> categories;
@@ -19,7 +20,11 @@ class CategoriesLoaded extends CategoryState {
   @override
   List<Object> get props => [categories, selectedCategory ?? ''];
 }
+class CategoryLoaded extends CategoryState {
+  final List<Category> categories;
 
+  CategoryLoaded(this.categories);
+}
 class CategoriesError extends CategoryState {
   final String message;
 

@@ -15,6 +15,8 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   CategoryBloc() : super(CategoriesInitial()) {
     on<LoadCategories>(_onLoadCategories);
     on<SelectCategory>(_onSelectCategory);
+    on<ToggleCategorySelection>(_onToggleCategorySelection);
+
   }
 
   Future<void> _onLoadCategories(
@@ -48,6 +50,22 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
         categories: currentState.categories,
         selectedCategory: event.category,
       ));
+    }
+  }
+
+  void _onToggleCategorySelection(ToggleCategorySelection event, Emitter<CategoryState> emit) {
+    if (state is CategoryLoaded) {
+      final List<Category> updatedCategories = (state as CategoryLoaded).categories.map((category) {
+        if (category.id == event.categoryId) {
+          return Category(
+            id: category.id,
+            name: category.name,
+            isSelected: !category.isSelected,
+          );
+        }
+        return category;
+      }).toList();
+      emit(CategoryLoaded(updatedCategories));
     }
   }
 }

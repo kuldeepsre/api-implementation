@@ -1,0 +1,10 @@
+[
+  { "id": 1, "name": "Chip 1", "isSelected": false },
+  { "id": 2, "name": "Chip 2", "isSelected": false },
+  { "id": 3, "name": "Chip 3", "isSelected": false },
+  { "id": 4, "name": "Chip 4", "isSelected": false },
+  { "id": 5, "name": "Chip 5", "isSelected": false },
+  { "id": 6, "name": "Chip 6", "isSelected": false },
+  { "id": 7, "name": "Chip 7", "isSelected": false },
+  { "id": 8, "name": "Chip 8", "isSelected": false }
+]

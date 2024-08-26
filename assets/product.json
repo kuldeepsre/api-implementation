@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "name": "Product 1",
+    "category": "new_arrival",
+    "imageUrl": "https://placehold.co/600x400/000000/FFFFFF/png",
+    "price": 29.99
+  },
+  {
+    "id": 2,
+    "name": "Product 2",
+    "category": "popular",
+    "imageUrl": "https://placehold.co/600x400/000000/FFFFFF/png",
+    "price": 49.99
+  },
+  {
+    "id": 3,
+    "name": "Product 3",
+    "category": "new_arrival",
+    "imageUrl": "https://placehold.co/600x400/000000/FFFFFF/png",
+    "price": 19.99
+  },
+  {
+    "id": 4,
+    "name": "Product 4",
+    "category": "new_arrival",
+    "imageUrl": "https://placehold.co/600x400/000000/FFFFFF/png",
+    "price": 19.99
+  },
+  {
+    "id": 2,
+    "name": "Product 7",
+    "category": "popular",
+    "imageUrl": "https://placehold.co/600x400/000000/FFFFFF/png",
+    "price": 29.99
+  }
+]

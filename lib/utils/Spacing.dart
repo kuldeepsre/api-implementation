@@ -18,7 +18,7 @@ class Spacing {
   static const EdgeInsets margin28 = EdgeInsets.all(28.0);
   static const EdgeInsets margin30 = EdgeInsets.all(30.0);
   static const EdgeInsets margin32 = EdgeInsets.all(32.0);
-
+  static const double defaultPadding = 16.0;
   // Margin with only vertical or horizontal spacing
   static const EdgeInsets vertical2 = EdgeInsets.symmetric(vertical: 2.0);
   static const EdgeInsets vertical4 = EdgeInsets.symmetric(vertical: 4.0);

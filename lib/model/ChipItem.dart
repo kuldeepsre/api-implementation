@@ -1,18 +1,19 @@
-class Category {
+class ChipItem {
   final int id;
   final String name;
   bool isSelected;
 
-  Category({
+  ChipItem({
     required this.id,
     required this.name,
     this.isSelected = false,
   });
 
-  factory Category.fromJson(Map<String, dynamic> json) {
-    return Category(
+  factory ChipItem.fromJson(Map<String, dynamic> json) {
+    return ChipItem(
       id: json['id'],
       name: json['name'],
+      isSelected: json['isSelected'] ?? false,
     );
   }
 }

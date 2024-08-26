@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:push/bloc/home_product/product_dashboard_bloc.dart';
 import 'package:push/bloc/navigaton/navigation_bloc.dart';
+import 'package:push/presentation/CartScreen.dart';
 import 'package:push/presentation/HomePage.dart';
 import 'package:push/presentation/dashboard.dart';
 import 'package:push/presentation/my_profile.dart';
@@ -32,7 +34,7 @@ class HomeScreen extends StatelessWidget {
             ),
             automaticallyImplyLeading: false,
             actions: [
-              BlocBuilder<NotificationBloc, NotificationState>(
+        /*      BlocBuilder<NotificationBloc, NotificationState>(
                 builder: (context, state) {
                   if (state is NotificationCountUpdated) {
                     return Padding(
@@ -42,8 +44,43 @@ class HomeScreen extends StatelessWidget {
                   }
                   return Container();
                 },
+              ),*/
+              BlocBuilder<ProductDashboardBloc, ProductDashboardState>(
+                builder: (context, state) {
+                  int cartCount = 0;
+                  if (state is ProductLoaded) {
+                    cartCount = state.cartCount;
+                  }
+                  return Stack(
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.shopping_cart),
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => CartScreen(),
+                          ));
+                        },
+                      ),
+                      if (cartCount > 0)
+                        Positioned(
+                          right: 6,
+                          top: 6,
+                          child: CircleAvatar(
+                            radius: 10,
+                            backgroundColor: Colors.red,
+                            child: Text(
+                              '$cartCount',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
+                  );
+                },
               ),
-
             ],
           ),
 

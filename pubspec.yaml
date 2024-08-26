@@ -69,6 +69,7 @@ dependencies:
   flutter_secure_storage: ^9.2.2
   hexcolor: ^3.0.1
   flutter_platform_widgets: ^3.3.5
+
 dev_dependencies:
   hive_generator: ^2.0.1
   injectable_generator: ^2.4.1
@@ -84,8 +85,11 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/icons/
     - assets/categories.json
     - assets/products.json
+    - assets/product.json
+    - assets/chips.json
   fonts:
     - family: Montserrat
       fonts:

@@ -13,14 +13,18 @@ import 'package:push/presentation/HomePage.dart';
 
 
 import 'bloc/dashboard/category/category_bloc.dart';
-import 'bloc/dashboard/product/product_bloc.dart';
+import 'bloc/dashboard/chip/chip_bloc.dart';
+
 import 'bloc/dashboard/vagitable/vigitable_bloc.dart';
 import 'bloc/filter_bloc/filter_bloc.dart';
+import 'bloc/home_product/product_dashboard_bloc.dart';
 import 'bloc/selection/selection_bloc.dart';
 import 'home.dart';
 import 'login_form.dart';
 import 'dart:async';
 import 'package:provider/provider.dart';
+
+import 'presentation/welcome_screen.dart';
 final GlobalKey<NavigatorState> navigatorKey =
 new GlobalKey<NavigatorState>();
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
@@ -61,15 +65,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
     return MultiProvider(
       providers:[
         BlocProvider<LoginBloc>(create: (context) => LoginBloc(LoginPostRepositoryImpl(ApiService()))),
         BlocProvider<NotificationBloc>(create: (context) => NotificationBloc()),
         BlocProvider<FilterBloc>(create: (context) => FilterBloc()),
         BlocProvider<CategoryBloc>(create: (context) => CategoryBloc()..add(LoadCategories())),
-        BlocProvider<ProductBloc>(create: (context) => ProductBloc()..add(LoadProducts(1))),
+/*        BlocProvider<ProductBloc>(create: (context) => ProductBloc()..add(LoadProducts(1))),*/
+        BlocProvider<ProductDashboardBloc>(create: (context) => ProductDashboardBloc()..add(LoadProducts())),
         BlocProvider<VegetableBloc>(create: (context) => VegetableBloc()..add(FetchVegetables())),
+        BlocProvider<ChipBloc>(create: (context) => ChipBloc()..add(LoadChips())),
 
       ],
       child: MaterialApp(
@@ -79,7 +84,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home:  HomeScreen(),
+        home:  WelcomeScreen(),
       ),
     );
   }

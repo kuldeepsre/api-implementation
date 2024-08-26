@@ -41,6 +41,8 @@ class TextStyles {
     color: hexToColor(hexColor),
   );
 
+
+
   // Predefined colors using hex codes
   static TextStyle heading1Primary = heading1('#000000'); // Black
   static TextStyle heading2Primary = heading2('#333333'); // Dark Gray

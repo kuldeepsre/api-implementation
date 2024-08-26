@@ -4,11 +4,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:push/CreateAccount.dart';
+import 'package:push/presentation/Signup.dart';
+import 'package:push/presentation/component/Background.dart';
+import 'package:push/presentation/component/already_have_an_account_acheck.dart';
+import 'package:push/presentation/component/or_divider.dart';
+import 'package:push/presentation/component/welcome_image.dart';
 import 'package:push/utils/LoadingIndicator.dart';
 import 'package:push/utils/Spacing.dart';
 import 'package:push/utils/custom_dialog.dart';
 import '../../bloc/login/login_bloc.dart';
 import 'color_utils.dart';
+
 import 'custom_button/CheckboxPopupDialog.dart';
 import 'custom_button/TopShapeClipper.dart';
 import 'custom_button/custom_button.dart';
@@ -67,175 +73,179 @@ class _LoginFormState extends State<LoginForm> {
               if (state is LoginLoading) {
                 return Center(child: LoadingIndicator());
               }
-              return Padding(
-                padding: Spacing.margin4,
+              return Background(
                 child: Padding(
-                  padding: const EdgeInsets.only(top:50),
-                  child: ClipPath(
-                    clipper: TopShapeClipper(),
-                    child: Card(
-                      shadowColor: Colors.red,
-
-
-                      elevation: 5,
-                      child: SingleChildScrollView(
-                        child: Center(
+                  padding: Spacing.margin4,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top:50),
+                    child: SingleChildScrollView(
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 18.0, horizontal: 12),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 18.0, horizontal: 12),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 18.0),
-                              child: Form(
-                                key: _formKey,
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Center(
-                                        child: const Text(
-                                      "Welcome To",
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          decoration: TextDecoration.none,
-                                          fontSize: 22),
-                                    )),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Center(
-                                      child: Container(
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          height: 40,
-                                          child: Image.asset(
-                                            'assets/images/image1.png',
-                                          )),
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 16.0, vertical: 8),
-                                      child: TextFormField(
-                                        decoration: InputDecoration(
-                                          enabledBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color:
-                                                    ColorUtils.app_primary_color,
-                                                width: 2),
-                                          ),
-                                          focusedBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color:
-                                                    ColorUtils.app_primary_color,
-                                                width: 4.0),
-                                          ),
-                                          border: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color:
-                                                    ColorUtils.app_primary_color),
-                                          ),
-                                          hintText:
-                                              "codingskills-demo101@mejidigital.in",
-                                          labelText: "Email",
-                                          labelStyle: TextStyle(
-                                            color: ColorUtils.app_primary_color,
-                                          ),
-                                          hintStyle: TextStyle(
-                                              color: Colors.grey.shade400),
+                            padding: const EdgeInsets.symmetric(vertical: 18.0),
+                            child: Form(
+                              key: _formKey,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  const WelcomeImage(),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16.0, vertical: 8),
+                                    child: TextFormField(
+                                      decoration: InputDecoration(
+                                        enabledBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color:
+                                              ColorUtils.app_primary_color,
+                                              width: 2),
                                         ),
-                                        autocorrect: _validate,
-                                        controller: _usernameController,
-                                        validator: (value) {
-                                          if (value == null || value.isEmpty) {
-                                            return "Enter Email Id!";
-                                          } else {
-                                            return null;
-                                          }
-                                        },
-                                      ),
-                                    ),
-                                    const SizedBox(height: 16),
-                                    Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 16.0, vertical: 8),
-                                      child: TextFormField(
-                                        obscureText: hidePassword,
-                                        decoration: InputDecoration(
-                                          labelText: "Password",
-                                          labelStyle: TextStyle(
-                                            color: ColorUtils.app_primary_color,
-                                          ),
-                                          enabledBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color:
-                                                    ColorUtils.app_primary_color,
-                                                width: 2),
-                                          ),
-                                          focusedBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color:
-                                                    ColorUtils.app_primary_color,
-                                                width: 4.0),
-                                          ),
-                                          border: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color:
-                                                    ColorUtils.app_primary_color),
-                                          ),
-                                          suffixIcon: IconButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                hidePassword = !hidePassword;
-                                              });
-                                            },
-                                            color: ColorUtils.app_primary_color
-                                                .withOpacity(0.4),
-                                            icon: Icon(hidePassword
-                                                ? Icons.visibility_off
-                                                : Icons.visibility),
-                                          ),
+                                        focusedBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color:
+                                              ColorUtils.app_primary_color,
+                                              width: 4.0),
                                         ),
-                                        autocorrect: _validate,
-                                        controller: _passwordController,
-                                        validator: (value) {
-                                          if (value == null || value.isEmpty) {
-                                            return "Enter Password!";
-                                          } else {
-                                            return null;
-                                          }
-                                        },
+                                        border: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color:
+                                              ColorUtils.app_primary_color),
+                                        ),
+                                        hintText:
+                                        "codingskills-demo101@mejidigital.in",
+                                        labelText: "Email",
+                                        labelStyle: TextStyle(
+                                          color: ColorUtils.app_primary_color,
+                                        ),
+                                        hintStyle: TextStyle(
+                                            color: Colors.grey.shade400),
                                       ),
-                                    ),
-                                    const SizedBox(height: 20),
-                                    CustomButton(
-                                      onPressed: () {
-                                        if (_formKey.currentState?.validate() ??
-                                            false) {
-                                          final username =
-                                              _usernameController.text;
-                                          final password =
-                                              _passwordController.text;
-                                          context
-                                              .read<LoginBloc>()
-                                              .add(LoginButtonPressed(
-                                                username: username,
-                                                password: password,
-                                              ));
+                                      autocorrect: _validate,
+                                      controller: _usernameController,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return "Enter Email Id!";
+                                        } else {
+                                          return null;
                                         }
                                       },
-                                      title: 'Login',
                                     ),
-                                    Padding(
+                                  ),
+                                  const SizedBox(height: 16),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16.0, vertical: 8),
+                                    child: TextFormField(
+                                      obscureText: hidePassword,
+                                      decoration: InputDecoration(
+                                        labelText: "Password",
+                                        labelStyle: TextStyle(
+                                          color: ColorUtils.app_primary_color,
+                                        ),
+                                        enabledBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color:
+                                              ColorUtils.app_primary_color,
+                                              width: 2),
+                                        ),
+                                        focusedBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color:
+                                              ColorUtils.app_primary_color,
+                                              width: 4.0),
+                                        ),
+                                        border: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color:
+                                              ColorUtils.app_primary_color),
+                                        ),
+                                        suffixIcon: IconButton(
+                                          onPressed: () {
+                                            setState(() {
+                                              hidePassword = !hidePassword;
+                                            });
+                                          },
+                                          color: ColorUtils.app_primary_color
+                                              .withOpacity(0.4),
+                                          icon: Icon(hidePassword
+                                              ? Icons.visibility_off
+                                              : Icons.visibility),
+                                        ),
+                                      ),
+                                      autocorrect: _validate,
+                                      controller: _passwordController,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return "Enter Password!";
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                  const SizedBox(height: 20),
+                                  CustomOutlineButton(
+                                    width: MediaQuery.of(context).size.width,
+
+                                    text: 'Login',
+                                    onPressed: () {
+                                      if (_formKey.currentState?.validate() ??
+                                          false) {
+                                        final username =
+                                            _usernameController.text;
+                                        final password =
+                                            _passwordController.text;
+                                        context
+                                            .read<LoginBloc>()
+                                            .add(LoginButtonPressed(
+                                          username: username,
+                                          password: password,
+                                        ));
+                                      }
+                                    },
+                                    textColor: Colors.blue,
+                                    borderColor: Colors.blue,
+                                    borderWidth: 2.0,
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold,
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 12.0, horizontal: 24.0),
+                                    margin: const EdgeInsets.symmetric(
+                                        vertical: 8.0),
+                                    borderRadius: 12.0,
+                                  ),
+                               /*   OrDivider(),*/
+                             /*     const SizedBox(height: Spacing.defaultPadding),*/
+                                  AlreadyHaveAnAccountCheck(
+                                    press: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return const SignUpScreen();
+                                          },
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                  /*               Padding(
                                       padding: const EdgeInsets.all(18.0),
                                       child: GestureDetector(
                                         onTap: () {
-                                          /*    Navigator.push(
+                                          *//*    Navigator.push(
                                             context,
                                             MaterialPageRoute(builder: (context) => const CreateAccount()),
-                                          );*/
+                                          );*//*
                                         },
                                         child: const Text(
                                           "Create Account",
@@ -245,210 +255,211 @@ class _LoginFormState extends State<LoginForm> {
                                                   TextDecoration.underline),
                                         ),
                                       ),
-                                    ),
-                                    NuroprismCircleButton(
-                                      icon: Icons.home,
-                                      onPressed: () {
-                                        _showFilterDialog(context);
-                                        print('Home button pressed');
-                                      },
-                                      iconColor: Colors.white,
-                                      gradientColors: const [
-                                        Colors.purple,
-                                        Colors.blue
-                                      ],
-                                      size: 80.0,
-                                      iconSize: 36.0,
-                                      borderWidth: 4.0,
-                                      borderColor: Colors.white,
-                                      elevation: 10.0,
-                                    ),
-                                    CustomOutlineButton(
-                                      text: 'Primary Button',
-                                      onPressed: () {
-                                        // Action for primary button
-                                        print('Primary button pressed');
-                                      },
-                                      textColor: Colors.blue,
-                                      borderColor: Colors.blue,
-                                      borderWidth: 2.0,
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.bold,
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 12.0, horizontal: 24.0),
-                                      margin: const EdgeInsets.symmetric(
-                                          vertical: 8.0),
-                                      borderRadius: 12.0,
-                                    ),
-                                    const SizedBox(height: 16.0),
-                                    CustomOutlineButton(
-                                      text: 'Secondary Button',
-                                      onPressed: () {
-                                        print('Secondary button pressed');
-                                      },
-                                      textColor: Colors.red,
-                                      borderColor: Colors.red,
-                                      borderWidth: 1.5,
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.normal,
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: 10.0, horizontal: 20.0),
-                                      margin: EdgeInsets.symmetric(vertical: 8.0),
-                                      borderRadius: 8.0,
-                                    ),
-                                    NuroprismLoginButton(
-                                      text: 'Login',
-                                      onPressed: () {
-                                        // Action for login button
-                                        print('Login button pressed');
-                                      },
-                                      textColor: Colors.white,
-                                      gradientColors: const [
-                                        Colors.purple,
-                                        Colors.blue
-                                      ],
-                                      borderRadius: 16.0,
-                                      elevation: 12.0,
-                                      fontSize: 20.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    EvaluationButton(
-                                      text: 'Submit',
-                                      onPressed: () {
-                                        _showNeumorphicDialog(context);
-                                        print('Submit button pressed');
-                                      },
-                                      textColor: Colors.white,
-                                      buttonColor: Colors.green,
-                                      elevation: 8.0,
-                                      borderRadius: 16.0,
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    SizedBox(height: 16.0),
-                                    EvaluationButton(
-                                      text: 'Cancel',
-                                      onPressed: () {
-                                        // Action for cancel button
-                                        print('Cancel button pressed');
-                                      },
-                                      textColor: Colors.black,
-                                      buttonColor: Colors.grey,
-                                      elevation: 4.0,
-                                      borderRadius: 8.0,
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                                    NuroprismCard(
-                                      title: 'Nuroprism Card',
-                                      subtitle:
-                                          'A futuristic card with gradient background.',
-                                      icon: Icons.star,
-                                      gradientColors: const [
-                                        Colors.purple,
-                                        Colors.blue
-                                      ],
-                                      borderRadius: 16.0,
-                                      elevation: 12.0,
-                                      padding: EdgeInsets.all(24.0),
-                                    ),
-                                    SizedBox(height: 16.0),
-                                    NuroprismCard(
-                                      title: 'Another Card',
-                                      subtitle: 'Different gradient and styling.',
-                                      icon: Icons.favorite,
-                                      gradientColors: const [Colors.red, Colors.orange],
-                                      borderRadius: 12.0,
-                                      elevation: 8.0,
-                                      padding: EdgeInsets.all(16.0),
-                                    ),
-                                    NuroprismCardView(
-                                      title: 'Nuroprism Card',
-                                      subtitle:
-                                          'A futuristic card with gradient background.',
-                                      icon: Icons.star,
-                                      gradientColors: const [
-                                        Colors.purple,
-                                        Colors.blue
-                                      ],
-                                      borderRadius: 16.0,
-                                      elevation: 12.0,
-                                      padding: EdgeInsets.all(24.0),
-                                      margin: EdgeInsets.symmetric(vertical: 8.0),
-                                    ),
-                                    SizedBox(height: 16.0),
-                                    NuroprismCardView(
-                                      title: 'Another Card',
-                                      subtitle: 'Different gradient and styling.',
-                                      icon: Icons.favorite,
-                                      gradientColors: const [Colors.red, Colors.orange],
-                                      borderRadius: 12.0,
-                                      elevation: 8.0,
-                                      padding: EdgeInsets.all(16.0),
-                                      margin: EdgeInsets.symmetric(vertical: 8.0),
-                                    ),
-                                    NuroprismTextFormField(
-                                      hintText: 'Email',
-                                      controller: _usernameController,
-                                      keyboardType: TextInputType.emailAddress,
-                                      borderColor: Colors.purple,
-                                      borderRadius: 16.0,
-                                      elevation: 8.0,
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 12.0, horizontal: 16.0),
-                                      margin: EdgeInsets.symmetric(vertical: 8.0),
-                                    ),
-                                    const SizedBox(height: 16.0),
-                                    NuroprismTextFormField(
-                                      hintText: 'Password',
-                                      controller: _passwordController,
-                                      obscureText: true,
-                                      borderColor: Colors.blue,
-                                      borderRadius: 16.0,
-                                      elevation: 8.0,
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 12.0, horizontal: 16.0),
-                                      margin: EdgeInsets.symmetric(vertical: 8.0),
-                                    ),
-                                    SizedBox(height: 20.0),
-                                    ElevatedButton(
-                                      onPressed: () async {
-                                        try {
-                                          //List<Option> options = await fetchOptions();
-                                          const jsonString = '''[{"id": 1, "name": "Option 1"},
+                                    ),*/
+                                  NuroprismCircleButton(
+                                    icon: Icons.home,
+                                    onPressed: () {
+                                      _showFilterDialog(context);
+
+                                    },
+                                    iconColor: Colors.white,
+                                    gradientColors: const [
+                                      Colors.purple,
+                                      Colors.blue
+                                    ],
+                                    size: 80.0,
+                                    iconSize: 36.0,
+                                    borderWidth: 4.0,
+                                    borderColor: Colors.white,
+                                    elevation: 10.0,
+                                  ),
+                                  CustomOutlineButton(
+                                    width: MediaQuery.of(context).size.width,
+                                    text: 'Primary Button',
+                                    onPressed: () {
+                                      // Action for primary button
+                                      print('Primary button pressed');
+                                    },
+                                    textColor: Colors.blue,
+                                    borderColor: Colors.blue,
+                                    borderWidth: 2.0,
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold,
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 12.0, horizontal: 24.0),
+                                    margin: const EdgeInsets.symmetric(
+                                        vertical: 8.0),
+                                    borderRadius: 12.0,
+                                  ),
+                                  const SizedBox(height: 16.0),
+                                  CustomOutlineButton(
+                                    width: MediaQuery.of(context).size.width,
+                                    text: 'Secondary Button',
+                                    onPressed: () {
+                                      print('Secondary button pressed');
+                                    },
+                                    textColor: Colors.red,
+                                    borderColor: Colors.red,
+                                    borderWidth: 1.5,
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.normal,
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 10.0, horizontal: 20.0),
+                                    margin: EdgeInsets.symmetric(vertical: 8.0),
+                                    borderRadius: 8.0,
+                                  ),
+                                  NuroprismLoginButton(
+                                    text: 'Login',
+                                    onPressed: () {
+                                      // Action for login button
+                                      print('Login button pressed');
+                                    },
+                                    textColor: Colors.white,
+                                    gradientColors: const [
+                                      Colors.purple,
+                                      Colors.blue
+                                    ],
+                                    borderRadius: 16.0,
+                                    elevation: 12.0,
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  EvaluationButton(
+                                    text: 'Submit',
+                                    onPressed: () {
+                                      _showNeumorphicDialog(context);
+                                      print('Submit button pressed');
+                                    },
+                                    textColor: Colors.white,
+                                    buttonColor: Colors.green,
+                                    elevation: 8.0,
+                                    borderRadius: 16.0,
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  SizedBox(height: 16.0),
+                                  EvaluationButton(
+                                    text: 'Cancel',
+                                    onPressed: () {
+                                      // Action for cancel button
+                                      print('Cancel button pressed');
+                                    },
+                                    textColor: Colors.black,
+                                    buttonColor: Colors.grey,
+                                    elevation: 4.0,
+                                    borderRadius: 8.0,
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                  NuroprismCard(
+                                    title: 'Nuroprism Card',
+                                    subtitle:
+                                    'A futuristic card with gradient background.',
+                                    icon: Icons.star,
+                                    gradientColors: const [
+                                      Colors.purple,
+                                      Colors.blue
+                                    ],
+                                    borderRadius: 16.0,
+                                    elevation: 12.0,
+                                    padding: EdgeInsets.all(24.0),
+                                  ),
+                                  SizedBox(height: 16.0),
+                                  NuroprismCard(
+                                    title: 'Another Card',
+                                    subtitle: 'Different gradient and styling.',
+                                    icon: Icons.favorite,
+                                    gradientColors: const [Colors.red, Colors.orange],
+                                    borderRadius: 12.0,
+                                    elevation: 8.0,
+                                    padding: EdgeInsets.all(16.0),
+                                  ),
+                                  NuroprismCardView(
+                                    title: 'Nuroprism Card',
+                                    subtitle:
+                                    'A futuristic card with gradient background.',
+                                    icon: Icons.star,
+                                    gradientColors: const [
+                                      Colors.purple,
+                                      Colors.blue
+                                    ],
+                                    borderRadius: 16.0,
+                                    elevation: 12.0,
+                                    padding: EdgeInsets.all(24.0),
+                                    margin: EdgeInsets.symmetric(vertical: 8.0),
+                                  ),
+                                  SizedBox(height: 16.0),
+                                  NuroprismCardView(
+                                    title: 'Another Card',
+                                    subtitle: 'Different gradient and styling.',
+                                    icon: Icons.favorite,
+                                    gradientColors: const [Colors.red, Colors.orange],
+                                    borderRadius: 12.0,
+                                    elevation: 8.0,
+                                    padding: EdgeInsets.all(16.0),
+                                    margin: EdgeInsets.symmetric(vertical: 8.0),
+                                  ),
+                                  NuroprismTextFormField(
+                                    hintText: 'Email',
+                                    controller: _usernameController,
+                                    keyboardType: TextInputType.emailAddress,
+                                    borderColor: Colors.purple,
+                                    borderRadius: 16.0,
+                                    elevation: 8.0,
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 12.0, horizontal: 16.0),
+                                    margin: EdgeInsets.symmetric(vertical: 8.0),
+                                  ),
+                                  const SizedBox(height: 16.0),
+                                  NuroprismTextFormField(
+                                    hintText: 'Password',
+                                    controller: _passwordController,
+                                    obscureText: true,
+                                    borderColor: Colors.blue,
+                                    borderRadius: 16.0,
+                                    elevation: 8.0,
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 12.0, horizontal: 16.0),
+                                    margin: EdgeInsets.symmetric(vertical: 8.0),
+                                  ),
+                                  SizedBox(height: 20.0),
+                                  ElevatedButton(
+                                    onPressed: () async {
+                                      try {
+                                        //List<Option> options = await fetchOptions();
+                                        const jsonString = '''[{"id": 1, "name": "Option 1"},
                                                                  {"id": 2, "name": "Option 2"},
                                                                  {"id": 3, "name": "Option 3"},
                                                                  {"id": 4, "name": "Option 4"} ]
                                                                    ''';
 
 
-                                          List<dynamic> jsonList =
-                                              json.decode(jsonString);
-                                          List<Option> options = jsonList
-                                              .map(
-                                                  (json) => Option.fromJson(json))
-                                              .toList();
+                                        List<dynamic> jsonList =
+                                        json.decode(jsonString);
+                                        List<Option> options = jsonList
+                                            .map(
+                                                (json) => Option.fromJson(json))
+                                            .toList();
 
-                                          print(options
-                                              .map((option) =>
-                                                  '${option.id}: ${option.name}')
-                                              .toList());
-                                          showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return CheckboxPopupDialog(
-                                                  options: options);
-                                            },
-                                          );
-                                        } catch (e) {
-                                          print('Error fetching options: $e');
-                                        }
-                                      },
-                                      child:
-                                          Text('Show Multiple Selection Popup'),
-                                    ),
-                                  ],
-                                ),
+                                        print(options
+                                            .map((option) =>
+                                        '${option.id}: ${option.name}')
+                                            .toList());
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return CheckboxPopupDialog(
+                                                options: options);
+                                          },
+                                        );
+                                      } catch (e) {
+                                        print('Error fetching options: $e');
+                                      }
+                                    },
+                                    child:
+                                    Text('Show Multiple Selection Popup'),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
