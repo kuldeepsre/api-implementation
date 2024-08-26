@@ -4,6 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:push/CreateAccount.dart';
+import 'package:push/painter/ArcPainter.dart';
+import 'package:push/painter/CircleClipper.dart';
+import 'package:push/painter/DiagonalClipper.dart';
+import 'package:push/painter/RoundedRectangleClipper.dart';
 import 'package:push/presentation/Signup.dart';
 import 'package:push/presentation/component/Background.dart';
 import 'package:push/presentation/component/already_have_an_account_acheck.dart';
@@ -32,7 +36,8 @@ import 'custom_button/outline_button.dart';
 import 'home.dart';
 import 'model/Option.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:push/painter/RectanglePainter.dart';
+import 'package:push/painter/CirclePainter.dart';
 class LoginForm extends StatefulWidget {
   @override
   _LoginFormState createState() => _LoginFormState();
@@ -96,7 +101,7 @@ class _LoginFormState extends State<LoginForm> {
                                   const SizedBox(
                                     height: 20,
                                   ),
-                                   LoginScreenTopImage(),
+                                   const LoginScreenTopImage(),
                                   const SizedBox(
                                     height: 20,
                                   ),
@@ -304,9 +309,9 @@ class _LoginFormState extends State<LoginForm> {
                                     borderWidth: 1.5,
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.normal,
-                                    padding: EdgeInsets.symmetric(
+                                    padding: const EdgeInsets.symmetric(
                                         vertical: 10.0, horizontal: 20.0),
-                                    margin: EdgeInsets.symmetric(vertical: 8.0),
+                                    margin: const EdgeInsets.symmetric(vertical: 8.0),
                                     borderRadius: 8.0,
                                   ),
                                   NuroprismLoginButton(
@@ -338,7 +343,7 @@ class _LoginFormState extends State<LoginForm> {
                                     fontSize: 18.0,
                                     fontWeight: FontWeight.bold,
                                   ),
-                                  SizedBox(height: 16.0),
+                                  const SizedBox(height: 16.0),
                                   EvaluationButton(
                                     text: 'Cancel',
                                     onPressed: () {
@@ -363,9 +368,9 @@ class _LoginFormState extends State<LoginForm> {
                                     ],
                                     borderRadius: 16.0,
                                     elevation: 12.0,
-                                    padding: EdgeInsets.all(24.0),
+                                    padding: const EdgeInsets.all(24.0),
                                   ),
-                                  SizedBox(height: 16.0),
+                                  const SizedBox(height: 16.0),
                                   NuroprismCard(
                                     title: 'Another Card',
                                     subtitle: 'Different gradient and styling.',
@@ -373,7 +378,7 @@ class _LoginFormState extends State<LoginForm> {
                                     gradientColors: const [Colors.red, Colors.orange],
                                     borderRadius: 12.0,
                                     elevation: 8.0,
-                                    padding: EdgeInsets.all(16.0),
+                                    padding: const EdgeInsets.all(16.0),
                                   ),
                                   NuroprismCardView(
                                     title: 'Nuroprism Card',
@@ -386,10 +391,10 @@ class _LoginFormState extends State<LoginForm> {
                                     ],
                                     borderRadius: 16.0,
                                     elevation: 12.0,
-                                    padding: EdgeInsets.all(24.0),
-                                    margin: EdgeInsets.symmetric(vertical: 8.0),
+                                    padding: const EdgeInsets.all(24.0),
+                                    margin: const EdgeInsets.symmetric(vertical: 8.0),
                                   ),
-                                  SizedBox(height: 16.0),
+                                  const SizedBox(height: 16.0),
                                   NuroprismCardView(
                                     title: 'Another Card',
                                     subtitle: 'Different gradient and styling.',
@@ -397,8 +402,8 @@ class _LoginFormState extends State<LoginForm> {
                                     gradientColors: const [Colors.red, Colors.orange],
                                     borderRadius: 12.0,
                                     elevation: 8.0,
-                                    padding: EdgeInsets.all(16.0),
-                                    margin: EdgeInsets.symmetric(vertical: 8.0),
+                                    padding: const EdgeInsets.all(16.0),
+                                    margin: const EdgeInsets.symmetric(vertical: 8.0),
                                   ),
                                   NuroprismTextFormField(
                                     hintText: 'Email',
@@ -409,7 +414,7 @@ class _LoginFormState extends State<LoginForm> {
                                     elevation: 8.0,
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 12.0, horizontal: 16.0),
-                                    margin: EdgeInsets.symmetric(vertical: 8.0),
+                                    margin: const EdgeInsets.symmetric(vertical: 8.0),
                                   ),
                                   const SizedBox(height: 16.0),
                                   NuroprismTextFormField(
@@ -421,9 +426,9 @@ class _LoginFormState extends State<LoginForm> {
                                     elevation: 8.0,
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 12.0, horizontal: 16.0),
-                                    margin: EdgeInsets.symmetric(vertical: 8.0),
+                                    margin: const EdgeInsets.symmetric(vertical: 8.0),
                                   ),
-                                  SizedBox(height: 20.0),
+                                  const SizedBox(height: 20.0),
                                   ElevatedButton(
                                     onPressed: () async {
                                       try {
@@ -458,8 +463,112 @@ class _LoginFormState extends State<LoginForm> {
                                       }
                                     },
                                     child:
-                                    Text('Show Multiple Selection Popup'),
+                                    const Text('Show Multiple Selection Popup'),
                                   ),
+                                  Center(
+                                child: CustomPaint(
+                                  size: const Size(300, 200), // Size of the CustomPaint widget
+                                  painter: RectanglePainter(),
+                                ),
+                              ),
+                                  Center(
+                                  child: CustomPaint(
+                                  size: const Size(300, 200), // Size of the CustomPaint widget
+                                  painter: CirclePainter(),
+                                ),
+                              ),
+                                  Center(
+                                  child: CustomPaint(
+                                  size: const Size(300, 200), // Size of the CustomPaint widget
+                                  painter: ArcPainter(),
+                                ),
+                              ),
+                                  const SizedBox(height: 20.0),
+                              Center(
+                                child: Container(
+                                  width: 100, // Width of the container
+                                  height: 100, // Height of the container
+                                  decoration: BoxDecoration(
+                                    color: Colors.blue[100], // Background color of the container
+                                    borderRadius: BorderRadius.circular(10), // Rounded corners
+                                  ),
+                                  child: CustomPaint(
+                                    painter: CirclePainter(),
+                                  ),
+                                ),
+                              ),
+
+                              const SizedBox(height: 20.0),
+                              Center(
+                                child: ClipPath(
+                                  clipper: DiagonalClipper(),
+                                  child: Container(
+                                    width: 300,
+                                    height: 200,
+                                    color: Colors.blue, // Background color of the container
+                                    child: const Center(
+                                      child: Text(
+                                        'Hello, Flutter!',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                                  const SizedBox(height: 20.0),
+
+                                  Center(
+                                    child: ClipPath(
+                                      clipper: CircleClipper(),
+                                      child: Container(
+                                        width: 200, // Width of the container
+                                        height: 200, // Height of the container
+                                        color: Colors.blue, // Background color of the container
+                                        alignment: Alignment.center, // Center the text inside the container
+                                        child: const Padding(
+                                          padding: EdgeInsets.all(8.0),
+                                          child: Text(
+                                            'Hello, Flutter! ',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 20.0),
+                                  ClipPath(
+                                    clipper: RoundedRectangleClipper(
+                                      borderRadius: 30
+                                    ),
+                                    child: Container(
+                                      width: 200, // Width of the container
+                                      height: 200, // Height of the container
+                                      color: Colors.blue, // Background color of the container
+                                      alignment: Alignment.center, // Center the text inside the container
+                                      child: const Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: Text(
+                                          'Hello, Flutter! ',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 20.0),
                                 ],
                               ),
                             ),
