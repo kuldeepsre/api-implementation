@@ -6,6 +6,7 @@ import 'package:push/bloc/home_product/product_dashboard_bloc.dart';
 import 'package:push/bloc/navigaton/navigation_bloc.dart';
 import 'package:push/presentation/CartScreen.dart';
 import 'package:push/presentation/HomePage.dart';
+import 'package:push/presentation/component/bottom_sheet.dart';
 import 'package:push/presentation/dashboard.dart';
 import 'package:push/presentation/my_profile.dart';
 import 'package:push/presentation/notification.dart';
@@ -102,6 +103,29 @@ class HomeScreen extends StatelessWidget {
               }
             },
           ),
+            floatingActionButton: FloatingActionButton(
+              child: Container(
+                width: 60,
+                height: 60,
+                decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: LinearGradient(colors: [Colors.deepPurple, Colors.deepPurple])
+                ),
+                child: const Icon(
+                  Icons.add,color: Colors.white54,
+                  size: 40,
+                ),
+              ),
+              onPressed: () {
+                showModalBottomSheet(
+
+                  context: context,
+                  builder: (BuildContext context) {
+                    return BottomSheetContent();
+                  },
+                );
+              },
+            ),
           bottomNavigationBar: BottomNavigationBarWidget(),
         ),
       ),
